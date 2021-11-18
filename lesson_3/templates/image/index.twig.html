@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+</head>
+<style>
+    body {
+        margin: 0 auto;
+    }
+
+    div {
+        margin: 0 auto;
+        width: 60%;
+        outline: red solid 1px;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div>
+        <img src="https://picsum.photos/500/500?random={{arrImages.id}}" alt="pic_{{arrImages.id}}">
+        <div> Название: {{ arrImages.name }}</div>
+    </div>
+</body>
+
+</html>

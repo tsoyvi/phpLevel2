@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{title}}</title>
+	</head>
+	<style>
+		img {
+			width: 200px;
+			margin: 10px;
+			border: 1px solid red;
+
+		}
+		a {
+			border: 1px solid black;
+			display: inline-block;
+			margin: 10px;
+			text-align: center;
+		}
+	</style>
+
+	<body>
+		<div>Hello, welcome to the gallery</div>
+
+			{% for item in arrImages %}
+					<a href="/?idImage={{item.id}}" target="blank">
+                    <img src="https://picsum.photos/200/200?random={{item.id}}" alt="pic_{{item.id}}"><div> Название: {{ item.name }}</div></a>
+			{% endfor %}
+
+
+
+	</body>
+</html>
