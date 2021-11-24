@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ product.title}}
+{% endblock %}
+
+{% block body %}
+
+	<div class="product-view">
+		<form method="post" action="cart.php">
+			<input type="hidden" name="idProduct" value="{{ product.id }}">
+			<div>{{ product.title}}</div>
+			<img src="https://picsum.photos/350/350?random={{ product.image }}" alt="pic_{{ product.image }}">
+			<p>
+				Цена:{{ product.price}}
+				$
+			</p>
+			<p>
+				{{ product.description}}
+			</p>
+			<input type="submit" name="product.id" value="Купить">
+		</form>
+		<br>
+		<a href="/products">
+			<button>назад к каталогу</button>
+		</a>
+	</div>
+
+{% endblock %}
