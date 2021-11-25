@@ -1,16 +1,20 @@
-<div class="product-list">
-    {% for product in allProducts %}
-    <div class="product">
-        <form method="post" action="cart.php">
-            <input type="hidden" name="idProduct" value="{{ product.id }}">
-            <div class="product">{{ product.title}}</div>
-            <img src="https://picsum.photos/200/200?random={{ product.id }}" alt="pic_{{ product.id }}">
-            <p>
-                Цена:
-                {{ product.price}}
-                $</p>
-            <input type="submit" name="product.id" value="Купить">
-        </form>
-    </div>
-    {% endfor %}
-</div>
+
+<table>
+    <tr>
+        <td>
+            Каталог
+        </td>
+        <td>
+           <a href="/products">Каталог</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Добавить товар в каталог
+        </td>
+        <td>
+           <a href="/add/product">Добавить товар в каталог</a>
+        </td>
+    </tr>
+
+</table>
