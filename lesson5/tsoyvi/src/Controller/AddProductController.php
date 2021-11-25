@@ -10,58 +10,43 @@ use Symfony\Component\HttpFoundation\Response;
 
 //
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+// use Symfony\Component\HttpFoundation\File\UploadedFile;
 //
 
 class AddProductController extends AbstractController
 {
     /**
-     * @Route("/", name="add_product")
+     * @Route("/add/product", name="add_product")
      *
      */
-    public function index(): Response
+
+    public function index(Request $request, string $photoDir): Response
     {
 
-        $request = Request::createFromGlobals();
-        echo 'request - ' . $request->request->get('title');
-
-        //dump ($request->request->keys());
-        //exit;
-
-        $this->new($request);
-
-// создает объект задачи и инициализирует некоторые данные для этого примера
-        $task = new SymProduct();
-        $task->setTitle('Write a blog post');
-        $task->setDescription('Write a Description');
-        $task->setPrice(100);
-
-        $form = $this->createForm(AddProductFormType::class, $task);
-
-        return $this->render('add_product/index.html.twig', [
-            'controller_name' => 'AddProductController',
-            'form' => $form->createView(),
-        ]);
-    }
-
-    function new (Request $request): Response {
-
         $task = new SymProduct();
 
         $form = $this->createForm(AddProductFormType::class, $task);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $form->getData() holds the submitted values
-            // но изначальная переменная `$task` также была обновлена
-            // $task = $form->getData();
-                echo'test ok';
-            // ... выполните какое-то действие, например сохраните задачу в базу данных
-            // for example, if Task is a Doctrine entity, save it!
-            // $entityManager = $this->getDoctrine()->getManager();
-            // $entityManager->persist($task);
-            // $entityManager->flush();
+
+            if ($image = $form->get('image')->getData()) {
+
+                $filename = bin2hex(random_bytes(6))  . '.' . $image->guessExtension();
+
+                try {
+                    $image->move($photoDir, $filename);
+                } catch (FileException $e) {
+                    // unable to upload the photo, give up
+                }
+                $task->setImage($filename);
+            }
+
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($task);
+            $entityManager->flush();
 
             return $this->redirectToRoute('products');
         }
@@ -70,5 +55,4 @@ class AddProductController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
 }
