@@ -18,18 +18,11 @@ class ProductsController extends AbstractController
      */
     public function index(): Response
     {
-
-     /*   if ($this->getUser()) {
-            //return $this->redirectToRoute('target_path');
-            dump($this->getUser());
-            exit;
-        }*/
-
         $productRepository = $this->getDoctrine()->getRepository(SymProduct::class);
         $products = $productRepository->findAll();
         //var_dump($products);
 
-
+        
         return $this->render('products/index.html.twig', [
             'controller_name' => 'ProductsController',
             'allProducts' => $products,

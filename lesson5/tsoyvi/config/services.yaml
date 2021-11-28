@@ -25,20 +25,3 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-
-
-security:
-    # ...
-
-    firewalls:
-        main:
-            # ...
-            remember_me:
-                secret:   '%kernel.secret%'
-                lifetime: 604800 # 1 week in seconds
-                path:     /
-                # по умолчанию, фунуция включается при установке
-                # флажка в поле формы входа (см. ниже), уберите комментарий
-                # из следующей строки, чтобы включать её всегда.
-                # always_remember_me: true
-
